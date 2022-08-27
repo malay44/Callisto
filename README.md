@@ -4,8 +4,9 @@
 
 _Make sure to run the `mongod` service before running the app locally._
 
-npm i
-setup .env as:-
+`npm i`
+
+mkdir .env as:-
   - DB_STRING=
   - SECRET=
   - GOOGLE_CLIENT_ID=
