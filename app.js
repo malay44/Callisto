@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 var passport = require('passport');
 var crypto = require('crypto');
-var routes = require('./routes');
+var routes = require('./routes/index');
 const connection = require('./config/database');
 
 // Package documentation - https://www.npmjs.com/package/connect-mongo
@@ -21,6 +21,7 @@ var app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/Public'),);
 
 
 /**
