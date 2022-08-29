@@ -1,3 +1,4 @@
+const { json } = require('express');
 const mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -8,6 +9,32 @@ const connection = mongoose.createConnection(conn, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
+const EventSchema = new mongoose.Schema({
+    name: String,
+    artist: [
+        {
+            name: String,
+            photo: String,
+            followers: Number
+        }
+    ],
+    discription: String,
+    comments: [
+        {
+            text: String,
+            posted: Date,
+            user: String
+        }
+    ],
+    likes: Number,
+    type: String,
+    date: Date,
+    place: String,
+    time: String,
+    photo: String
+    
+})
 
 const UserSchema = new mongoose.Schema({
     username: String,

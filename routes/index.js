@@ -5,7 +5,8 @@ const connection = require('../config/database');
 const User = connection.models.User;
 const isAuth = require('./authMiddleware').isAuth;
 const isAdmin = require('./authMiddleware').isAdmin;
-const path = require('path')
+const isUser = require('./authMiddleware').isUser;
+const path = require('path');
 
 /**
  * -------------- POST ROUTES ----------------
@@ -17,24 +18,31 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login-
 
 
 router.post('/register', (req, res, next) => {
-    const saltHash = genPassword(req.body.pw);
-    
-    const salt = saltHash.salt;
-    const hash = saltHash.hash;
-    
-    const newUser = new User({
-        username: req.body.uname,
-        hash: hash,
-        salt: salt,
-        admin: false
-    });
-    
-    newUser.save()
+
+    User.findOne({ username: req.body.uname })
     .then((user) => {
-        console.log(user);
-    });
-    
-    res.redirect('/');
+        if (user) {
+            res.send(`<script>alert("user alreay exists"); window.location.href = "/login"; </script>`); 
+        } else {
+            const saltHash = genPassword(req.body.pw);
+            const salt = saltHash.salt;
+            const hash = saltHash.hash;
+            const newUser = new User({
+                username: req.body.uname,
+                hash: hash,
+                salt: salt,
+                admin: false
+            });
+            
+            newUser.save()
+            .then((user) => {
+                console.log(user);
+            });
+            
+            res.redirect('/');
+                    next();
+                }
+            }).catch((err) => done(err));
 });
 
 
@@ -47,10 +55,10 @@ router.get('/', (req, res, next) => {
 });
 
 
-// router.get('/login', (req, res, next) => {
+router.get('/login', (req, res, next) => {
 
-//     res.sendFile(path.join( __dirname, "..", "Public/index.html"));
-// })
+    res.sendFile(path.join( __dirname, "..", "Public/index.html"));
+})
 
 router.get(
   "/auth/google",
