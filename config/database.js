@@ -32,8 +32,8 @@ const EventSchema = new mongoose.Schema({
     date: Date,
     place: String,
     time: String,
-    photo: String
-    
+    photo: String,
+    registrationFee: Number
 })
 
 const UserSchema = new mongoose.Schema({
@@ -53,21 +53,22 @@ const UserSchema = new mongoose.Schema({
     admin: Boolean
 });
 
-const gUserSchema = new mongoose.Schema({
-    sub: String,
-    name: String,
-    given_name: String,
-    family_name: String,
-    picture: String,
-    email: String,
-    email_verified: Boolean,
-    locale: String,
-    admin: Boolean
-});
+// const gUserSchema = new mongoose.Schema({
+//     sub: String,
+//     name: String,
+//     given_name: String,
+//     family_name: String,
+//     picture: String,
+//     email: String,
+//     email_verified: Boolean,
+//     locale: String,
+//     admin: Boolean
+// });
 
 
 const User = connection.model('User', UserSchema, 'User');
-const gUser = connection.model('gUser', gUserSchema, 'gUser');
+const Event = connection.model('Event', EventSchema, 'Event');
+// const gUser = connection.model('gUser', gUserSchema, 'gUser');
 
 
 module.exports = connection;
