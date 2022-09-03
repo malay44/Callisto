@@ -20,20 +20,22 @@ const EventSchema = new mongoose.Schema({
         }
     ],
     discription: String,
+    briefdiscription: String,
     comments: [
         {
             text: String,
-            posted: Date,
+            posted: String,
             user: String
         }
     ],
     likes: Number,
     type: String,
-    date: Date,
+    date: String,
     place: String,
     time: String,
     photo: String,
-    registrationFee: Number
+    registrationFee: Number,
+    hidden: Boolean,
 })
 
 const UserSchema = new mongoose.Schema({

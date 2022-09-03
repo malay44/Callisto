@@ -21,7 +21,10 @@ var app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/Public'),);
+// app.use(express.static(__dirname + '/Public/login-signup'));
+// app.use(express.static(__dirname + '/Public/Admin-home'));
+app.use("/static", express.static(__dirname + '/Public'));
+
 
 
 /**

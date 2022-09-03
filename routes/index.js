@@ -13,8 +13,7 @@ const path = require("path");
  * -------------- POST ROUTES ----------------
  */
 
-router.post(
-  "/login",
+router.post("/login",
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
     successRedirect: "login-success",
@@ -50,13 +49,14 @@ router.post("/register", (req, res, next) => {
     .catch((err) => done(err));
 });
 
-router.post("/admin-route/reg", isAdmin, (req, res, next) => {
+router.post("/admin/eventreg", isAdmin, (req, res, next) => {
+  console.log("hi");
   // res.send('You made it to the admin route.');
   Event.findOne({ name: req.body.ename })
     .then((event) => {
       if (event) {
         res.send(
-          `<script>alert("Event alreay exists"); window.location.href = "/admin-route/reg"; </script>`
+          `<script>alert("Event alreay exists"); window.location.href = "/admin/eventreg"; </script>`
         );
       } else {
         const newEvent = new Event({
@@ -68,18 +68,19 @@ router.post("/admin-route/reg", isAdmin, (req, res, next) => {
             },
           ],
           discription: req.body.disc,
-
+          briefdiscription: req.body.bdisc,
           type: req.body.eType,
           date: req.body.eDate,
           place: req.body.ePlace,
           time: req.body.eTime,
           photo: req.body.eiURL,
           registrationFee: req.body.eFees,
+          // hidden: req.body.hidden,
         });
         newEvent.save().then((event) => {
           console.log(event);
         });
-        res.redirect("/admin-route/reg");
+        res.redirect("/admin/eventreg");
       }
     })
     .catch((err) => console.log(err));
@@ -89,11 +90,11 @@ router.post("/admin-route/reg", isAdmin, (req, res, next) => {
  */
 
 router.get("/", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "Public/index.html"));
+  res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
 });
 
 router.get("/login", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "Public/index.html"));
+  res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
 });
 
 router.get(
@@ -131,8 +132,8 @@ router.get("/protected-route", isAuth, (req, res, next) => {
   res.send("You made it to the route.");
 });
 
-router.get("/admin-route", isAdmin, (req, res, next) => {
-  res.send("You made it to the admin route.");
+router.get("/admin/eventreg", isAdmin, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "..", "Public/eventreg/index.html"));
 });
 
 // Visiting this route logs the user out
