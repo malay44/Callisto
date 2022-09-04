@@ -11,32 +11,34 @@ const connection = mongoose.createConnection(conn, {
 });
 
 const EventSchema = new mongoose.Schema({
+  name: String,
+  artist: {
     name: String,
-    artist: [
-        {
-            name: String,
-            photo: String,
-            followers: Number
-        }
-    ],
-    discription: String,
-    briefdiscription: String,
-    comments: [
-        {
-            text: String,
-            posted: String,
-            user: String
-        }
-    ],
-    likes: Number,
-    type: String,
-    date: String,
-    place: String,
-    time: String,
     photo: String,
-    registrationFee: Number,
-    hidden: Boolean,
-})
+    followers: Number,
+  },
+  discription: String,
+  briefdiscription: String,
+  comments: [
+    {
+      text: String,
+      posted: String,
+      user: String,
+    },
+  ],
+  likes: Number,
+  type: String,
+  date: String,
+  place: String,
+  time: String,
+  photo: String,
+  registrationFee: Number,
+  hidden: Boolean,
+  regUsers: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "User",
+  }],
+});
 
 const UserSchema = new mongoose.Schema({
     username: String,

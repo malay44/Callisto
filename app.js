@@ -58,8 +58,8 @@ app.use((req, res, next) => {
     // console.log("<-------------------------START-------------------------->");
     // // console.log("<-------------------------session details-------------------------->");
     console.log(req.session);
-    // console.log("<-------------------------user details-------------------------->");
-    // console.log(req.user);
+    console.log("<-------------------------user details-------------------------->");
+    console.log(req.user);
     // console.log("<-------------------------END-------------------------->");
     next();
 });

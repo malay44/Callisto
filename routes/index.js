@@ -13,7 +13,8 @@ const path = require("path");
  * -------------- POST ROUTES ----------------
  */
 
-router.post("/login",
+router.post(
+  "/login",
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
     successRedirect: "login-success",
@@ -61,12 +62,10 @@ router.post("/admin/eventreg", isAdmin, (req, res, next) => {
       } else {
         const newEvent = new Event({
           name: req.body.ename,
-          artist: [
-            {
-              name: req.body.aname,
-              photo: req.body.aiURL,
-            },
-          ],
+          artist: {
+            name: req.body.aname,
+            photo: req.body.aiURL,
+          },
           discription: req.body.disc,
           briefdiscription: req.body.bdisc,
           type: req.body.eType,
@@ -85,6 +84,45 @@ router.post("/admin/eventreg", isAdmin, (req, res, next) => {
     })
     .catch((err) => console.log(err));
 });
+
+
+
+router.post("/event/register", isAuth, (req, res, next) => {
+  console.log("----------------------hi------------------");
+  const eventid = req.rawHeaders[33].substring(28);
+  console.log(eventid);
+
+  Event.findById(eventid)
+    .then((event) => {
+      console.log(event);
+      if (event.regUsers.includes(req.user._id)) {
+        console.log("user already registered");
+        event.regUsers.pop(req.user._id);
+        event.save().then((event) => {
+          console.log(event);
+        });
+        res.send(
+          `<script>alert("unregisterd"); window.location.href = "/event/63136c8f17fe470c461e1120"; </script>`
+        );
+        // Event.populate(event);
+      } else {
+        event.regUsers.push(req.user._id);
+        event.save().then((event) => {
+          // Event.populate(event, {path: 'regUsers' });
+          console.log(event);
+        });
+        res.send(
+          `<script>alert("registerd"); window.location.href = "/event/63136c8f17fe470c461e1120"; </script>`
+        );
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  // Event.findOne({id: req.rawHeaders[32]})
+});
+
 /**
  * -------------- GET ROUTES ----------------
  */
@@ -95,6 +133,10 @@ router.get("/", (req, res, next) => {
 
 router.get("/login", (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
+});
+
+router.get("/event/63136c8f17fe470c461e1120", isAuth, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
 });
 
 router.get(
