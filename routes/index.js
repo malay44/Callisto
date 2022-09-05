@@ -50,14 +50,14 @@ router.post("/register", (req, res, next) => {
     .catch((err) => done(err));
 });
 
-router.post("/admin/eventreg", isAdmin, (req, res, next) => {
-  console.log("hi");
+router.post("/admin/addevent", isAdmin, (req, res, next) => {
+  // console.log("hi");
   // res.send('You made it to the admin route.');
   Event.findOne({ name: req.body.ename })
     .then((event) => {
       if (event) {
         res.send(
-          `<script>alert("Event alreay exists"); window.location.href = "/admin/eventreg"; </script>`
+          `<script>alert("Event alreay exists"); window.location.href = "/admin/addevent"; </script>`
         );
       } else {
         const newEvent = new Event({
@@ -74,35 +74,87 @@ router.post("/admin/eventreg", isAdmin, (req, res, next) => {
           time: req.body.eTime,
           photo: req.body.eiURL,
           registrationFee: req.body.eFees,
+          regUsers: '6314d87f7876e6b5172718a5',
           // hidden: req.body.hidden,
         });
         newEvent.save().then((event) => {
           console.log(event);
         });
-        res.redirect("/admin/eventreg");
+        res.redirect("/admin/addevent");
       }
     })
     .catch((err) => console.log(err));
 });
 
 
+router.post("/admin/editevent", isAdmin, (req, res, next) => {
+  const eventid = req.rawHeaders[33].substring(28);
+  res.redirect(`http://localhost:3000/admin/editevent/${eventid}`)
+});
+
+router.post("/admin/editevent/:id", isAdmin, (req, res, next) => {
+  Event.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.ename,
+      artist: {
+        name: req.body.aname,
+        photo: req.body.aiURL,
+      },
+      discription: req.body.disc,
+      briefdiscription: req.body.bdisc,
+      type: req.body.eType,
+      date: req.body.eDate,
+      place: req.body.ePlace,
+      time: req.body.eTime,
+      photo: req.body.eiURL,
+      registrationFee: req.body.eFees,
+      // hidden: req.body.hidden,
+    },
+    function (err, event) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect(`http://localhost:3000/event/${req.params.id}`);
+        console.log(event);
+      }
+    }
+  );
+});
+
+router.post("/admin/eventdelete", isAdmin, (req, res, next) => {
+  const eventid = req.rawHeaders[33].substring(28);
+  // console.log(eventid);
+  // console.log("-----------------------delete--------------------");
+  Event.findByIdAndDelete(eventid, function (err, docs) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Deleted :", docs);
+    }
+  });
+  res.send(
+    `<script>alert("event deleted"); window.location.href = "/event/${eventid}"; </script>`
+    );
+  });
+  
 
 router.post("/event/register", isAuth, (req, res, next) => {
   console.log("----------------------hi------------------");
   const eventid = req.rawHeaders[33].substring(28);
   console.log(eventid);
-
+  
   Event.findById(eventid)
-    .then((event) => {
-      console.log(event);
-      if (event.regUsers.includes(req.user._id)) {
-        console.log("user already registered");
-        event.regUsers.pop(req.user._id);
-        event.save().then((event) => {
-          console.log(event);
-        });
-        res.send(
-          `<script>alert("unregisterd"); window.location.href = "/event/63136c8f17fe470c461e1120"; </script>`
+  .then((event) => {
+    console.log(event);
+    if (event.regUsers.includes(req.user._id)) {
+      console.log("user already registered");
+      event.regUsers.pop(req.user._id);
+      event.save().then((event) => {
+        console.log(event);
+      });
+      res.send(
+        `<script>alert("unregisterd"); window.location.href = "/event/${eventid}"; </script>`
         );
         // Event.populate(event);
       } else {
@@ -112,17 +164,17 @@ router.post("/event/register", isAuth, (req, res, next) => {
           console.log(event);
         });
         res.send(
-          `<script>alert("registerd"); window.location.href = "/event/63136c8f17fe470c461e1120"; </script>`
-        );
-      }
-    })
-    .catch((err) => {
-      console.log(err);
+          `<script>alert("registerd"); window.location.href = "/event/${eventid}"; </script>`
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      
+      // Event.findOne({id: req.rawHeaders[32]})
     });
-
-  // Event.findOne({id: req.rawHeaders[32]})
-});
-
+      
 /**
  * -------------- GET ROUTES ----------------
  */
@@ -135,8 +187,13 @@ router.get("/login", (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
 });
 
-router.get("/event/63136c8f17fe470c461e1120", isAuth, (req, res, next) => {
+router.get("/event/6314dd955e0ceed240700f20", isAuth, (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
+});
+router.get("/admin/editevent/:id", isAdmin, (req, res, next) => {
+  Event.findById(req.params.id,function (err, event) {
+    res.render('editevent/editevent.ejs', event);
+  });
 });
 
 router.get(
@@ -174,8 +231,8 @@ router.get("/protected-route", isAuth, (req, res, next) => {
   res.send("You made it to the route.");
 });
 
-router.get("/admin/eventreg", isAdmin, (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "Public/eventreg/index.html"));
+router.get("/admin/addevent", isAdmin, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "..", "Public/addevent/index.html"));
 });
 
 // Visiting this route logs the user out

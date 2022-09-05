@@ -13,7 +13,10 @@ const connection = mongoose.createConnection(conn, {
 const EventSchema = new mongoose.Schema({
   name: String,
   artist: {
-    name: String,
+    name: {
+      type: String,
+      unique: true
+    },
     photo: String,
     followers: Number,
   },

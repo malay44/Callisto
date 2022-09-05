@@ -5,6 +5,8 @@ var passport = require('passport');
 var crypto = require('crypto');
 var routes = require('./routes/index');
 const connection = require('./config/database');
+const path = require("path");
+
 
 // Package documentation - https://www.npmjs.com/package/connect-mongo
 const MongoStore = require('connect-mongo')(session);
@@ -19,6 +21,8 @@ require('dotenv').config();
 // Create the Express application
 var app = express();
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // app.use(express.static(__dirname + '/Public/login-signup'));

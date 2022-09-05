@@ -36,13 +36,19 @@
           <!-- <a href="" >Register</a> -->
         </div>
         <div class="card__link" id="editevent">
-          <a href="" class="button">Edit event</a>
+          <form action="/admin/editevent" method="post">
+            <input type="submit" name="EditEvent" value="Edit Event" class="button"/>
+          </form>
+          <!-- <a href="" class="button">Edit event</a> -->
         </div>
         <div class="card__link" id="userdata">
           <a href="" class="button">User Data</a>
         </div>
-            <div class="card__link" id="deleteevent">
-          <a href="" class="button">Delete Event</a>
+        <div class="card__link" id="deleteevent">
+          <form action="/admin/eventdelete" method="post">
+            <input type="submit" name="DeleteEvent" value="Delete Event" class="button"/>
+          </form>
+          <!-- <a href="" class="button">Delete Event</a> -->
         </div>
 
           </div>
