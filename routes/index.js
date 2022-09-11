@@ -17,7 +17,7 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    successRedirect: "login-success",
+    successRedirect: "home",
   })
 );
 
@@ -187,6 +187,11 @@ router.get("/login", (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
 });
 
+router.get("/home", isAuth, (req, res, next) => {
+  res.render('home/home.ejs');
+  // res.sendFile(path.join(__dirname, "..", "Public/home/home.html"));
+});
+
 router.get("/event/6314dd955e0ceed240700f20", isAuth, (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
 });
@@ -205,7 +210,7 @@ router.get(
   "/google/redirect",
   passport.authenticate("google", {
     failureRedirect: "/login-failure",
-    successRedirect: "/login-success",
+    successRedirect: "/home",
   })
 );
 

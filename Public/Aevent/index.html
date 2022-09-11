@@ -6,67 +6,73 @@
     <link rel="stylesheet" type="text/css" href="/static/Aevent/style.css"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class="wrapper">
-      <div class="card">
-        <div class="card__img">
-          <img src="https://www.specialized.com/medias/01-ROAD-3212-Hero-2800x1620.jpg?context=bWFzdGVyfGltYWdlc3wzMzA0NzV8aW1hZ2UvanBlZ3xpbWFnZXMvaGRjL2hkZC85MTMxMDkzNjU1NTgyLmpwZ3wyOGYxN2VhOWU3OGZmZDkyZWYwNDUwMWYyNjQyOThiNjdkYzVlYTI0NGM1NjFhNTQ4M2M2NWJkMDdhZDJhMDhi">
+    <div class="landingpage">
+      <div class="navbar">
+        <a class="navlogo">GASLUR</a>
+        <button class="hamburger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+              <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+          </button>
+        <div class="navlinkwrap">
+          <span class="navlink selectedlink"><a href="http://localhost:3000/home">Home</a></span>
+          <span class="navlink">My Profile</span>
+          <span class="navlink">Activity</span>
+          <span class="navlink">How It Works</span>
         </div>
-        <div class="card__content">
-          <div class="card__kicker">Ornare Consectetur</div>
-          <h3 class="card__title">Cras Bibendum Venenatis</h3>
-          <div class="card__excerpt">
-            <p>Vestibulum id ligula porta felis euismod semperWritten & Performed By Shareh & Talha Anjum
-    
-    Produced, Mixed & Mastered by  @superdupersultan ascascascascascascascascascascascascascasc
-    
-    Connect:
-    
-    https://www.instagram.com/sharehakhter
-    
-    https://www.instagram.com/talhahanjum
-    
-    https://www.instagram.com/superdupers....</p>
-          </div>
+        <div class="buttonwrap">
+          <button class="createbtn selectedbtn">SIGN IN</button>
         </div>
-        <div class="container">
-        <div class="card__link" id="register">
-          <form action="/event/register" method="post">
-            <input type="submit" name="Register" value="Register" class="button"/>
-          </form>
-          <!-- <a href="" >Register</a> -->
-        </div>
-        <div class="card__link" id="editevent">
-          <form action="/admin/editevent" method="post">
-            <input type="submit" name="EditEvent" value="Edit Event" class="button"/>
-          </form>
-          <!-- <a href="" class="button">Edit event</a> -->
-        </div>
-        <div class="card__link" id="userdata">
-          <a href="" class="button">User Data</a>
-        </div>
-        <div class="card__link" id="deleteevent">
-          <form action="/admin/eventdelete" method="post">
-            <input type="submit" name="DeleteEvent" value="Delete Event" class="button"/>
-          </form>
-          <!-- <a href="" class="button">Delete Event</a> -->
-        </div>
-
-          </div>
-          <div class="poll">
-            <h3>Select an option below that you like best or something...</h3>
-            <ul>
-              <li><input name="poll_value" type="radio" value="option 1" />Option 1</li>
-              <li><input name="poll_value" type="radio" value="option 1" />Option 2</li>
-              <li><input name="poll_value" type="radio" value="option 1" />Option 1</li>
-              <li><input name="poll_value" type="radio" value="option 1" />Option 2</li>
-            </ul>
-            <div class="card__link">
-              <input class="button" type="submit" value="Submit" />
-            </div>
-            
-          </div>
       </div>
-    </div>
-    <!-- <script src="/static/Aevent/script.js"></script> -->
+
+    <div id="article_container">
+      <div class="article_container_img"></div>
+      <div class="article_container_content">
+           <div class="the">
+               <div class="line"></div>
+               <h4>the</h4>
+               <div class="line"></div>
+           </div>
+           <h1>Great Adventure</h1>
+           <div class="divider"></div>
+           <p>
+               Nam fermentum orci felis, non mattis odio consequat sit amet. Proin fermentum mattis urna a posuere. Donec sed lacus ut ante consectet iaculis. Suspendisse ligula tortor, auctor eu magna sed, pretium ornare mi. Praesent ultrices vitae est ac hendrerit. Duis quis mattis dolor. Cras consectetur velit eros, non dictum purus pellentesque a. 
+           </p>
+           <div class="container">
+            <div class="btn" id="register">
+              <form action="/event/register" method="post">
+                <input class="input" type="submit" name="Register" value="Register" class="button"/>
+              </form>
+            </div>
+            <div class="btn" id="editevent">
+              <form action="/admin/editevent" method="post">
+                <input class="input" type="submit" name="EditEvent" value="Edit Event" class="button"/>
+              </form>
+            </div>
+            <div class="btn" id="userdata">
+              <form action="" method="post">
+                <input class="input" type="submit" name="Register" value="User Data" class="button"/>
+              </form>
+            </div>
+            <div class="btn" id="deleteevent">
+              <form action="/admin/eventdelete" method="post">
+                <input class="input" type="submit" name="DeleteEvent" value="Delete Event" class="button"/>
+              </form>
+            </div>
+            <div class="btn" id="poll">
+              <form action="" method="post">
+                <input class="input" type="submit" name="Register" value="Poll" class="button"/>
+              </form>
+            </div>
+          </div>
+          </div>
+   </div>
+
+   <div class="footer2">
+    <div></div>
+    <p>Copyright 2021 Gaslur</p>
+  </div>
+</div>
+    <!-- <script src="script.js"></script> -->
   </body>
 </html>
