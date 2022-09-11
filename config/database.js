@@ -57,7 +57,11 @@ const UserSchema = new mongoose.Schema({
     email: String,
     email_verified: Boolean,
     locale: String,
-    admin: Boolean
+    admin: Boolean,
+    regEvent: [{
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Event",
+    }],
 });
 
 // const gUserSchema = new mongoose.Schema({

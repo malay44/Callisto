@@ -143,18 +143,46 @@ router.post("/event/register", isAuth, (req, res, next) => {
   console.log("----------------------hi------------------");
   const eventid = req.rawHeaders[33].substring(28);
   console.log(eventid);
-  
+
+  User.findById(req.user._id)
+    .then((user) => {
+      console.log(user);
+      if (user.regEvent.includes(eventid)) {
+        console.log("user already registered");
+        user.regEvent.pop(eventid);
+        user.save().then((user) => {
+          console.log(user);
+        });
+        // res.send(
+        //   `<script>alert("unregisterd"); window.location.href = "/event/${eventid}"; </script>`
+        //   );
+        // Event.populate(event);
+      } else {
+        user.regEvent.push(eventid);
+        user.save().then((event) => {
+          // Event.populate(event, {path: 'regUsers' });
+          console.log(event);
+        });
+        // res.send(
+        //   `<script>alert("registerd"); window.location.href = "/event/${eventid}"; </script>`
+        //   );
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   Event.findById(eventid)
-  .then((event) => {
-    console.log(event);
-    if (event.regUsers.includes(req.user._id)) {
-      console.log("user already registered");
-      event.regUsers.pop(req.user._id);
-      event.save().then((event) => {
-        console.log(event);
-      });
-      res.send(
-        `<script>alert("unregisterd"); window.location.href = "/event/${eventid}"; </script>`
+    .then((event) => {
+      console.log(event);
+      if (event.regUsers.includes(req.user._id)) {
+        console.log("user already registered");
+        event.regUsers.pop(req.user._id);
+        event.save().then((event) => {
+          console.log(event);
+        });
+        res.send(
+          `<script>alert("unregisterd"); window.location.href = "/event/${eventid}"; </script>`
         );
         // Event.populate(event);
       } else {
@@ -165,15 +193,15 @@ router.post("/event/register", isAuth, (req, res, next) => {
         });
         res.send(
           `<script>alert("registerd"); window.location.href = "/event/${eventid}"; </script>`
-          );
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-      
-      // Event.findOne({id: req.rawHeaders[32]})
+        );
+      }
+    })
+    .catch((err) => {
+      console.log(err);
     });
+
+  // Event.findOne({id: req.rawHeaders[32]})
+});
       
 /**
  * -------------- GET ROUTES ----------------
