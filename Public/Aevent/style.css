@@ -16,6 +16,12 @@ body {
     
 }
 
+a{
+  color: inherit;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;  font-style: normal;
+}
+
 #article_container {
     width: 100%;
     /* max-width: 1000px; */
@@ -37,7 +43,7 @@ body {
     margin-right: 0%;
     text-align: center;
     background-color: #d4d9df;
-    background: url("https://source.unsplash.com/HW5013eyvlU");
+    /* background: url("https://source.unsplash.com/HW5013eyvlU"); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -94,7 +100,7 @@ p {
     font-weight: 600;
     color: #33363b;
     text-transform: uppercase;
-    cursor: pointer;
+    /* cursor: pointer; */
     font-family: 'Roboto', sans-serif;
     margin: 10px;
     margin-top: 50px;
@@ -256,6 +262,7 @@ p {
   font-size: 0.875rem;
   font-weight: 600;
   font-family: 'Roboto', sans-serif;
+  cursor:pointer;
 }
 
 @media (max-width: 768px) {

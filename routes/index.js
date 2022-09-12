@@ -17,7 +17,7 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    successRedirect: "home",
+    successRedirect: "myprofile",
   })
 );
 
@@ -215,14 +215,32 @@ router.get("/login", (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
 });
 
-router.get("/home", isAuth, (req, res, next) => {
-  res.render('home/home.ejs');
-  // res.sendFile(path.join(__dirname, "..", "Public/home/home.html"));
+router.get("/myprofile", isAuth, (req, res, next) => {
+  User.findById(req.user._id)
+    .populate({ path: "regEvent", select: ["artist", "_id", "name","discription","briefdiscription","photo","time"] })
+    .exec((err, docs) => {
+      if (err) throw err;
+      // res.send(docs);
+      res.render('myprofile/myprofile.ejs',{user: docs,});
+    });
+  // res.sendFile(path.join(__dirname, "..", "Public/myprofile/myprofile.html"));
 });
 
-router.get("/event/6314dd955e0ceed240700f20", isAuth, (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
+router.get("/event/:id", isAuth, (req, res, next) => {
+  Event.findById(req.params.id, function (err, event) {
+    User.findById(req.user._id).then((user) => {
+      if (user.admin) {
+        res.render("Aevent/index.ejs",event);
+        // res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
+      } else {
+        res.render("Uevent/index.ejs");
+        // res.sendFile(path.join(__dirname, "..", "Public/Uevent/index.html"));
+      }
+    });
+  });
 });
+
+
 router.get("/admin/editevent/:id", isAdmin, (req, res, next) => {
   Event.findById(req.params.id,function (err, event) {
     res.render('editevent/editevent.ejs', event);
@@ -238,7 +256,7 @@ router.get(
   "/google/redirect",
   passport.authenticate("google", {
     failureRedirect: "/login-failure",
-    successRedirect: "/home",
+    successRedirect: "/myprofile",
   })
 );
 
