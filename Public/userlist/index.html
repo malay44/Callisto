@@ -1,32 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>CodePen - User list with quick search</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<div class="container">
-  <div class="row">
-    <div class="search">
-      <label>Search for user</label>
-      <input type="search" data-search="data-search" placeholder="Search..."/>
-      <button class="search__clear">&times;</button>
-      <div class="recent-search">
-        <button class="clear-btn" disabled="disabled" onclick="clearRecent()">No Recent Items</button>
-        <div class="recent-search__list"></div>
+<html lang="es" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="landingpage">
+      <div class="navbar">
+        <a class="navlogo">GASLUR</a>
+        <button class="hamburger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+              <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+          </button>
+        <div class="navlinkwrap">
+          <span class="navlink selectedlink unselectable">Home</span>
+          <span class="navlink unselectable">My Profile</span>
+          <span class="navlink unselectable">Activity</span>
+          <span class="navlink unselectable">How It Works</span>
+        </div>
+        <div class="buttonwrap">
+          <button class="createbtn selectedbtn">SIGN IN</button>
+        </div>
       </div>
+
+      
+<div class="container">
+    <div class="row">
+      <div class="search">
+        <input type="search" data-search="data-search" placeholder="Search..."/>
+        <button class="search__clear">&times;</button>
+        <div class="recent-search">
+          <button class="clear-btn" disabled="disabled" onclick="clearRecent()">No Recent Items</button>
+          <div class="recent-search__list"></div>
+        </div>
+      </div>
+      <div class="list" id="list" data-searchable="data-searchable"></div>
     </div>
-    <div class="list" id="list" data-searchable="data-searchable"></div>
+  </div>
+
+   <div class="footer2">
+    <div></div>
+    <p>Copyright 2021 Gaslur</p>
   </div>
 </div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<script src='https://codepen.io/ryanparag/pen/pxVOpP.js'></script>
-<script src='https://codepen.io/ryanparag/pen/pxVOpP.js'></script><script  src="./script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

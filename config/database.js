@@ -62,7 +62,6 @@ const EventSchema = new mongoose.Schema({
 
 const UserSchema = new mongoose.Schema({
     username: String,
-    number: String,
     hash: String,
     salt: String,
     admin: Boolean,

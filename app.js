@@ -6,6 +6,7 @@ var crypto = require('crypto');
 var routes = require('./routes/index');
 const connection = require('./config/database');
 const path = require("path");
+var cors = require('cors')
 
 
 // Package documentation - https://www.npmjs.com/package/connect-mongo
@@ -28,6 +29,7 @@ app.use(express.urlencoded({extended: true}));
 // app.use(express.static(__dirname + '/Public/login-signup'));
 // app.use(express.static(__dirname + '/Public/Admin-home'));
 app.use("/static", express.static(__dirname + '/Public'));
+app.use(cors());
 
 
 
