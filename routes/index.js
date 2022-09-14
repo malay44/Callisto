@@ -33,6 +33,8 @@ router.post("/register", (req, res, next) => {
         const hash = saltHash.hash;
         const newUser = new User({
           username: req.body.uname,
+          email: req.body.Email,
+          number: req.body.Number,
           hash: hash,
           salt: salt,
           admin: false,
@@ -241,7 +243,7 @@ router.get("/event/:id", isAuth, (req, res, next) => {
         res.render("Aevent/index.ejs",event);
         // res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
       } else {
-        res.render("Uevent/index.ejs");
+        res.render("Uevent/index.ejs",event);
         // res.sendFile(path.join(__dirname, "..", "Public/Uevent/index.html"));
       }
     });

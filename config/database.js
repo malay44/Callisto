@@ -45,6 +45,7 @@ const EventSchema = new mongoose.Schema({
 
 const UserSchema = new mongoose.Schema({
     username: String,
+    number: String,
     hash: String,
     salt: String,
     admin: Boolean,
@@ -57,7 +58,7 @@ const UserSchema = new mongoose.Schema({
     email: String,
     email_verified: Boolean,
     locale: String,
-    admin: Boolean,
+    
     regEvent: [{
       type: mongoose.SchemaTypes.ObjectId,
       ref: "Event",

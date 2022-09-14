@@ -25,7 +25,9 @@
         <span class="navlink">How It Works</span>
       </div>
       <div class="buttonwrap">
-        <button class="createbtn selectedbtn">SIGN OUT</button>
+        <a href="http://localhost:3000/logout">
+          <button class="createbtn selectedbtn">SIGN OUT</button>
+        </a>
       </div>
     </div>
 
@@ -68,29 +70,29 @@
           On:- <%= date %>, <%= time %>
         </p>
         <div class="container">
-          <div class="btn" id="register">
+          <!-- <div class="btn" id="register">
             <form action="/event/register" method="post">
               <input class="input" type="submit" name="Register" value="Register" class="button" />
             </form>
-          </div>
+          </div> -->
           <div class="btn" id="editevent">
             <form action="/admin/editevent" method="post">
-              <input class="input" type="submit" name="EditEvent" value="Edit Event" class="button" />
+              <input class="input" type="submit" name="EditEvent" value="Edit Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>
           <div class="btn" id="userdata">
             <form action="" method="post">
-              <input class="input" type="submit" name="Register" value="User Data" class="button" />
+              <input class="input" type="submit" name="Register" value="User Data" class="button" style="color: whitesmoke;" />
             </form>
           </div>
           <div class="btn" id="deleteevent">
             <form action="/admin/eventdelete" method="post">
-              <input class="input" type="submit" name="DeleteEvent" value="Delete Event" class="button" />
+              <input class="input" type="submit" name="DeleteEvent" value="Delete Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>
           <div class="btn" id="poll">
             <!-- <form > -->
-              <input class="input" type="submit" name="Register" value="Poll" class="button"/>
+              <input class="input" type="submit" name="Register" value="Poll" class="button" style="color: whitesmoke;"/>
             <!-- </form> -->
           </div>
         </div>
