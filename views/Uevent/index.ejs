@@ -11,7 +11,7 @@
 <body>
   <div class="landingpage">
     <div class="navbar">
-      <a class="navlogo">GASLUR</a>
+      <a class="navlogo">CALLISTO</a>
       <button class="hamburger">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
@@ -45,7 +45,7 @@
 
     <div id="article_container">
       <img class="article_container_img" src="https://source.unsplash.com/random/200x200/?img=1" alt="">
-      <!-- <img class="article_container_img" src="<%= photo %> " alt=""> -->
+      <!-- <img class="article_container_img" src="<%= event.photo %> " alt=""> -->
       <div class="article_container_content">
         <div class="the">
           <div class="line"></div>
@@ -53,21 +53,21 @@
           <div class="line"></div>
         </div>
         <h1>
-          <%= name %>
+          <%= event.name %>
         </h1>
         <div class="divider"></div>
         <p>
-          <%= discription %> Nam fermentum orci felis, non mattis odio consequat sit amet. Proin fermentum mattis urna a
+          <%= event.discription %> Nam fermentum orci felis, non mattis odio consequat sit amet. Proin fermentum mattis urna a
             posuere. Donec sed lacus ut ante consectet iaculis. Suspendisse ligula tortor, auctor eu magna sed, pretium
             ornare mi. Praesent ultrices vitae est ac hendrerit. Duis quis mattis dolor. Cras consectetur velit eros,
             non dictum purus pellentesque a.
         </p>
         <br>
         <p>
-          By:- <%= artist.name %>
+          By:- <%= event.artist.name %>
         </p>
         <p>
-          On:- <%= date %>, <%= time %>
+          On:- <%= event.date %>, <%= event.time %>
         </p>
         <div class="container">
           <div class="btn" id="register">
@@ -98,7 +98,7 @@
         </div>
       </div>
     </div>
-
+    <%- include('../partials/footer'); %>
     <div class="footer2">
       <div></div>
       <p>Copyright 2021 Gaslur</p>

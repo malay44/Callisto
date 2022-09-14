@@ -8,12 +8,14 @@ const isAuth = require("./authMiddleware").isAuth;
 const isAdmin = require("./authMiddleware").isAdmin;
 const isUser = require("./authMiddleware").isUser;
 const path = require("path");
+const { exit } = require("process");
 
 /**
  * -------------- POST ROUTES ----------------
  */
 
-router.post("/login",
+router.post(
+  "/login",
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
     successRedirect: "home",
@@ -75,7 +77,19 @@ router.post("/admin/addevent", isAdmin, (req, res, next) => {
           time: req.body.eTime,
           photo: req.body.eiURL,
           registrationFee: req.body.eFees,
-          regUsers: '6314d87f7876e6b5172718a5',
+          regUsers: "6314d87f7876e6b5172718a5",
+          pollusres: [
+            {
+              user: "630bbe5d27676b723b167125",
+              opt: "1",
+            },
+          ],
+          pollcount: {
+            poll1: 0,
+            poll2: 0,
+            poll3: 0,
+            poll4: 0,
+          },
           // hidden: req.body.hidden,
         });
         newEvent.save().then((event) => {
@@ -87,10 +101,44 @@ router.post("/admin/addevent", isAdmin, (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
+router.post("/poll", isAuth, (req, res, next) => {
+
+  const eventid = req.rawHeaders[33].substring(28);
+
+  Event.findById(eventid).then(async (event) => {
+
+    const usrid = await req.user._id;
+    var x = 0;
+
+    for (let index = 0; index < event.pollusres.length; index++) {
+      if (usrid.equals(event.pollusres[index].user)) {
+        res.send(
+          `<script>alert("You have already submitted poll"); window.location.href = "/event/${eventid}"; </script>`
+        );
+        x = 1;
+        break;
+      }
+    }
+    if (x == 0) {
+      event.pollusres.push({ user: req.user._id, opt: req.body.poll });
+      if (req.body.poll==1) {
+        event.pollcount.poll1++;
+      }else if(req.body.poll==2) {
+        event.pollcount.poll2++;
+      }else if(req.body.poll==3) {
+        event.pollcount.poll3++;
+      }else if(req.body.poll==4) {
+        event.pollcount.poll4++;
+      }
+      event.save();
+      res.redirect(`http://localhost:3000/event/${eventid}`);
+    }
+  });
+});
 
 router.post("/admin/editevent", isAdmin, (req, res, next) => {
   const eventid = req.rawHeaders[33].substring(28);
-  res.redirect(`http://localhost:3000/admin/editevent/${eventid}`)
+  res.redirect(`http://localhost:3000/admin/editevent/${eventid}`);
 });
 
 router.post("/admin/editevent/:id", isAdmin, (req, res, next) => {
@@ -110,6 +158,18 @@ router.post("/admin/editevent/:id", isAdmin, (req, res, next) => {
       time: req.body.eTime,
       photo: req.body.eiURL,
       registrationFee: req.body.eFees,
+      pollusres: [
+        {
+          user: "630bbe5d27676b723b167125",
+          opt: "1",
+        },
+      ],
+      pollcount: {
+        poll1: 0,
+        poll2: 0,
+        poll3: 0,
+        poll4: 0,
+      },
       // hidden: req.body.hidden,
     },
     function (err, event) {
@@ -136,9 +196,8 @@ router.post("/admin/eventdelete", isAdmin, (req, res, next) => {
   });
   res.send(
     `<script>alert("event deleted"); window.location.href = "/event/${eventid}"; </script>`
-    );
-  });
-  
+  );
+});
 
 router.post("/event/register", isAuth, (req, res, next) => {
   console.log("----------------------hi------------------");
@@ -203,7 +262,7 @@ router.post("/event/register", isAuth, (req, res, next) => {
 
   // Event.findOne({id: req.rawHeaders[32]})
 });
-      
+
 /**
  * -------------- GET ROUTES ----------------
  */
@@ -216,22 +275,33 @@ router.get("/login", (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
 });
 
-router.get("/home",isAuth, (req, res, next) => {
-  Event.find().then((events)=>{
+router.get("/home", isAuth, (req, res, next) => {
+  Event.find().then((events) => {
     // res.send(events);
     console.log(events);
-    res.render('home/home.ejs',{events: events});
-  })
+    res.render("home/home.ejs", { events: events });
+  });
 });
 
 router.get("/myprofile", isAuth, (req, res, next) => {
   User.findById(req.user._id)
-    .populate({ path: "regEvent", select: ["artist", "_id", "name","discription","briefdiscription","photo","time"] })
+    .populate({
+      path: "regEvent",
+      select: [
+        "artist",
+        "_id",
+        "name",
+        "discription",
+        "briefdiscription",
+        "photo",
+        "time",
+      ],
+    })
     .exec((err, docs) => {
       if (err) throw err;
       // res.send(docs);
       console.log(docs);
-      res.render('myprofile/myprofile.ejs',{user: docs,});
+      res.render("myprofile/myprofile.ejs", { user: docs });
     });
   // res.sendFile(path.join(__dirname, "..", "Public/myprofile/myprofile.html"));
 });
@@ -239,11 +309,23 @@ router.get("/myprofile", isAuth, (req, res, next) => {
 router.get("/event/:id", isAuth, (req, res, next) => {
   Event.findById(req.params.id, function (err, event) {
     User.findById(req.user._id).then((user) => {
+      const usrid = req.user._id;
+      var pollopt;
+      for (let index = 0; index < event.pollusres.length; index++) {
+        if (usrid.equals(event.pollusres[index].user)) {
+          pollopt = event.pollusres[index].opt;
+          break;
+        }
+      }
       if (user.admin) {
-        res.render("Aevent/index.ejs",event);
+        res.render("Aevent/index.ejs", { 
+          event: event, 
+          pollopt: pollopt });
         // res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
       } else {
-        res.render("Uevent/index.ejs",event);
+        res.render("Uevent/index.ejs", { 
+          event: event, 
+          pollopt: pollopt });
         // res.sendFile(path.join(__dirname, "..", "Public/Uevent/index.html"));
       }
     });
@@ -296,16 +378,18 @@ router.get("/api", (req, res, next) => {
   });
 });
 router.get("/admin/editevent/:id", isAdmin, (req, res, next) => {
-  Event.findById(req.params.id,function (err, event) {
-    res.render('editevent/editevent.ejs', event);
+  Event.findById(req.params.id, function (err, event) {
+    res.render("editevent/editevent.ejs", event);
   });
 });
 
-router.get("/auth/google",
+router.get(
+  "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
 );
 
-router.get("/google/redirect",
+router.get(
+  "/google/redirect",
   passport.authenticate("google", {
     failureRedirect: "/login-failure",
     successRedirect: "/home",

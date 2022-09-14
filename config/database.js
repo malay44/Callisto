@@ -15,7 +15,7 @@ const EventSchema = new mongoose.Schema({
   artist: {
     name: {
       type: String,
-      unique: true
+      unique: true,
     },
     photo: String,
     followers: Number,
@@ -30,6 +30,21 @@ const EventSchema = new mongoose.Schema({
     },
   ],
   likes: Number,
+  pollusres: [
+    {
+      user: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "User",
+      },
+      opt: String||Number,
+    },
+  ],
+  pollcount: {
+    poll1: Number,
+    poll2: Number,
+    poll3: Number,
+    poll4: Number,
+  },
   type: String,
   date: String,
   place: String,
@@ -37,10 +52,12 @@ const EventSchema = new mongoose.Schema({
   photo: String,
   registrationFee: Number,
   hidden: Boolean,
-  regUsers: [{
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: "User",
-  }],
+  regUsers: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const UserSchema = new mongoose.Schema({
