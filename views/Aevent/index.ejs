@@ -25,12 +25,25 @@
         <span class="navlink">How It Works</span>
       </div>
       <div class="buttonwrap">
-        <button class="createbtn selectedbtn">SIGN IN</button>
+        <button class="createbtn selectedbtn">SIGN OUT</button>
       </div>
     </div>
 
+    <div class="poll" id="poll-box">
+      <h3>Select an option below that you like best or something...</h3>
+      <ul>
+        <li><input name="poll_value" type="radio" value="option 1" />Option 1</li>
+        <li><input name="poll_value" type="radio" value="option 1" />Option 2</li>
+        <li><input name="poll_value" type="radio" value="option 1" />Option 1</li>
+        <li><input name="poll_value" type="radio" value="option 1" />Option 2</li>
+      </ul>
+      <input class="btn" type="submit" value="Submit" />
+      <input class="btn" type="submit" value="Back" id="back" />
+    </div>
+
     <div id="article_container">
-      <img class="article_container_img" src="https://picsum.photos/200/300" alt="">
+      <img class="article_container_img" src="https://source.unsplash.com/random/200x200/?img=1" alt="">
+      <!-- <img class="article_container_img" src="<%= photo %> " alt=""> -->
       <div class="article_container_content">
         <div class="the">
           <div class="line"></div>
@@ -76,9 +89,9 @@
             </form>
           </div>
           <div class="btn" id="poll">
-            <form action="" method="post">
-              <input class="input" type="submit" name="Register" value="Poll" class="button" />
-            </form>
+            <!-- <form > -->
+              <input class="input" type="submit" name="Register" value="Poll" class="button"/>
+            <!-- </form> -->
           </div>
         </div>
       </div>
@@ -89,7 +102,7 @@
       <p>Copyright 2021 Gaslur</p>
     </div>
   </div>
-  <!-- <script src="script.js"></script> -->
+  <script src="/static/Aevent/script.js"></script>
 </body>
 
 </html>

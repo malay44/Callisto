@@ -13,11 +13,10 @@ const path = require("path");
  * -------------- POST ROUTES ----------------
  */
 
-router.post(
-  "/login",
+router.post("/login",
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    successRedirect: "myprofile",
+    successRedirect: "home",
   })
 );
 
@@ -215,12 +214,21 @@ router.get("/login", (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
 });
 
+router.get("/home",isAuth, (req, res, next) => {
+  Event.find().then((events)=>{
+    // res.send(events);
+    console.log(events);
+    res.render('home/home.ejs',{events: events});
+  })
+});
+
 router.get("/myprofile", isAuth, (req, res, next) => {
   User.findById(req.user._id)
     .populate({ path: "regEvent", select: ["artist", "_id", "name","discription","briefdiscription","photo","time"] })
     .exec((err, docs) => {
       if (err) throw err;
       // res.send(docs);
+      console.log(docs);
       res.render('myprofile/myprofile.ejs',{user: docs,});
     });
   // res.sendFile(path.join(__dirname, "..", "Public/myprofile/myprofile.html"));
@@ -240,44 +248,68 @@ router.get("/event/:id", isAuth, (req, res, next) => {
   });
 });
 
-
+router.get("/api", (req, res, next) => {
+  res.json.send({
+    results: [
+      {
+        gender: "male",
+        name: { title: "Mr", first: "Jorge", last: "Márquez" },
+        location: {
+          street: { number: 2519, name: "Calle de La Democracia" },
+          city: "Móstoles",
+          state: "Navarra",
+          country: "Spain",
+          postcode: 90582,
+          coordinates: { latitude: "-34.0018", longitude: "-143.6928" },
+          timezone: {
+            offset: "+11:00",
+            description: "Magadan, Solomon Islands, New Caledonia",
+          },
+        },
+        email: "jorge.marquez@example.com",
+        login: {
+          uuid: "98f489ee-2cec-4951-86f9-9a9c25750568",
+          username: "whitemeercat627",
+          password: "galaxy",
+          salt: "kV6XKveq",
+          md5: "16c35a807f58245b55bd9b5a7cc529eb",
+          sha1: "34862983b5276d6b129ac278894af7bb9e0861a1",
+          sha256:
+            "e77b7cf2eb096cda053772235784193bee2716e624e16cd8ae3ad4c7a5219a01",
+        },
+        dob: { date: "1983-01-20T17:51:47.461Z", age: 39 },
+        registered: { date: "2014-09-11T01:33:09.131Z", age: 8 },
+        phone: "913-430-335",
+        cell: "684-614-633",
+        id: { name: "DNI", value: "17225071-U" },
+        picture: {
+          large: "https://randomuser.me/api/portraits/men/81.jpg",
+          medium: "https://randomuser.me/api/portraits/med/men/81.jpg",
+          thumbnail: "https://randomuser.me/api/portraits/thumb/men/81.jpg",
+        },
+        nat: "ES",
+      },
+    ],
+    info: { seed: "fadee30557ac04eb", results: 1, page: 1, version: "1.4" },
+  });
+});
 router.get("/admin/editevent/:id", isAdmin, (req, res, next) => {
   Event.findById(req.params.id,function (err, event) {
     res.render('editevent/editevent.ejs', event);
   });
 });
 
-router.get(
-  "/auth/google",
+router.get("/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
 );
 
-router.get(
-  "/google/redirect",
+router.get("/google/redirect",
   passport.authenticate("google", {
     failureRedirect: "/login-failure",
-    successRedirect: "/myprofile",
+    successRedirect: "/home",
   })
 );
 
-// When you visit http://localhost:3000/register, you will see "Register Page"
-// router.get('/register', (req, res, next) => {
-
-//     const form = '<h1>Register Page</h1><form method="post" action="register">\
-//                     Enter Username:<br><input type="text" name="uname">\
-//                     <br>Enter Password:<br><input type="password" name="pw">\
-//                     <br><br><input type="submit" value="Submit"></form>';
-
-//     res.send(form);
-
-// });
-
-/**
- * Lookup how to authenticate users on routes with Local Strategy
- * Google Search: "How to use Express Passport Local Strategy"
- *
- * Also, look up what behaviour express session has without a maxage set
- */
 router.get("/protected-route", isAuth, (req, res, next) => {
   res.send("You made it to the route.");
 });

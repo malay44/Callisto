@@ -1,31 +1,22 @@
- ///-------client == admin||user----------///
-var deleteevent = document.getElementById("deleteevent");
-var userdata = document.getElementById("userdata");
-var editevent = document.getElementById("editevent");
-var register = document.getElementById("register");
 var poll = document.getElementById("poll");
+var pollBox = document.getElementById("poll-box");
+var back = document.getElementById("back");
+poll.onclick = function(){blur(true)};
+back.onclick = function(){blur(false)};
+// pollBox.style.display = "none";
 
-var ispoll = true;
-var isregistered = true;
-clientType("user");
 
-function clientType(client) {
-    if (client == "admin") {
-      editevent.style.display = "block";
-      deleteevent.style.display = "block";
-      userdata.style.display = "block";
-      register.style.display = "none";
-      poll.style.display = "none";
-    } else {
-        editevent.style.display = "none";
-        deleteevent.style.display = "none";
-        userdata.style.display = "none";
-        register.style.display = "block";
-        if (isregistered == true){
-            register.querySelector('.input').value = "Un-Register";
-        }
-        if(ispoll == true){
-          poll.style.display = "block";
-        }
-    }
+function blur(toggle){
+  if (toggle){
+    console.log("yess")
+    document.getElementById("article_container").style.filter = "blur(8px)";
+    document.getElementById("article_container").style.pointerEvents = "none";
+    pollBox.style.opacity = "1"
   }
+  else{
+    console.log("nooo");
+    document.getElementById("article_container").style.filter = "blur(0px)";
+    document.getElementById("article_container").style.pointerEvents = "auto";
+    pollBox.style.opacity = "0"
+  }
+}

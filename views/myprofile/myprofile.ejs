@@ -17,12 +17,13 @@
         </svg>
       </button>
     <div class="navlinkwrap">
-      <span class="navlink">Home</span>
-      <span class="navlink selectedlink">My Profile</span>
+      <span class="navlink"><a href="http://localhost:3000/home">Home</a></span>
+       <span class="navlink selectedlink"><a href="http://localhost:3000/myprofile">My Profile</a></span>
       <span class="navlink">Activity</span>
       <span class="navlink">How It Works</span>
     </div>
     <div class="buttonwrap">
+      <a href="http://localhost:3000/logout"><button class="createbtn selectedbtn">SIGN OUT</button></a>
     </div>
   </div>
   <div class="discover">
@@ -36,7 +37,7 @@
       <% user.regEvent.forEach(function(event) { %>
         <div class=item>
           <a href="http://localhost:3000/event/<%=event._id%>">
-            <img class="item-img" src="https://picsum.photos/200/300" border="0">
+            <img class="item-img" src="https://source.unsplash.com/random/200x200/?img=1" border="0">
             <!-- <img class="item-img" src="<%=event.photo%>" border="0"> -->
           </a>
           <div class="item-title">
