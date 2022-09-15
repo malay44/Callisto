@@ -47,8 +47,8 @@
     </div>
 
     <div id="article_container">
-      <!-- <img class="article_container_img" src="https://source.unsplash.com/random/200x200/?img=1" alt=""> -->
-      <img class="article_container_img" src="<%= event.photo %> " alt="">
+      <img class="article_container_img" src="https://source.unsplash.com/HW5013eyvlU" alt="">
+      <!-- <img class="article_container_img" src="<%= event.photo %> " alt=""> -->
       <div class="article_container_content">
         <div class="the">
           <div class="line"></div>
@@ -73,18 +73,13 @@
           On:- <%= event.date %>, <%= event.time %>
         </p>
         <div class="container">
-          <div class="btn" id="register">
-            <form action="/event/register" method="post">
-              <input class="input" type="submit" name="Register" value="Register" class="button" style="color: whitesmoke;" />
-            </form>
-          </div>
           <div class="btn" id="editevent">
             <form action="/admin/editevent" method="post">
               <input class="input" type="submit" name="EditEvent" value="Edit Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>
           <div class="btn" id="userdata">
-            <form action="" method="post">
+            <form action="/userlist/<%= event._id %>" method="get">
               <input class="input" type="submit" name="Register" value="User Data" class="button" style="color: whitesmoke;" />
             </form>
           </div>
@@ -93,13 +88,8 @@
               <input class="input" type="submit" name="DeleteEvent" value="Delete Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>
-          <div class="btn" id="poll">
-            <!-- <form > -->
-              <input class="input" type="submit" name="Register" value="Poll" class="button" style="color: whitesmoke;"/>
-            <!-- </form> -->
-          </div>
           <div class="btn" id="polldata">
-            <form action="/userlist/<%= event._id %> " method="get">
+            <form action="" method="get">
               <input class="input" type="submit" name="polldata" value="Poll Data" class="button" style="color: whitesmoke;" />
             </form>
           </div>

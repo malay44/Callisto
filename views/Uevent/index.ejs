@@ -32,19 +32,22 @@
     </div>
 
     <div class="poll" id="poll-box">
-      <h3>Select an option below that you like best or something...</h3>
+      <form action="/poll" method="post">
+      <h3> <%= pollopt.polltitle %> </h3>
       <ul>
-        <li><input name="poll_value" type="radio" value="option 1" />Option 1</li>
-        <li><input name="poll_value" type="radio" value="option 1" />Option 2</li>
-        <li><input name="poll_value" type="radio" value="option 1" />Option 1</li>
-        <li><input name="poll_value" type="radio" value="option 1" />Option 2</li>
-      </ul>
-      <input class="btn" type="submit" value="Submit" />
+          <div style="display: none ;"> <%= pollans %> </div>
+          <li><input name="poll" type="radio" value="1" /><%= pollopt.poll1 %> </li>
+          <li><input name="poll" type="radio" value="2" /><%= pollopt.poll2 %> </li>
+          <li><input name="poll" type="radio" value="3" /><%= pollopt.poll3 %> </li>
+          <li><input name="poll" type="radio" value="4" /><%= pollopt.poll4 %> </li>
+        </ul>
+        <input class="btn" type="submit" value="Submit" />
+      </form>
       <input class="btn" type="submit" value="Back" id="back" />
     </div>
 
     <div id="article_container">
-      <img class="article_container_img" src="https://source.unsplash.com/random/200x200/?img=1" alt="">
+      <img class="article_container_img" src="https://source.unsplash.com/HW5013eyvlU" alt="">
       <!-- <img class="article_container_img" src="<%= event.photo %> " alt=""> -->
       <div class="article_container_content">
         <div class="the">
@@ -75,32 +78,19 @@
               <input class="input" type="submit" name="Register" value="Register" class="button" style="color: whitesmoke;" />
             </form>
           </div>
-          <!-- <div class="btn" id="editevent">
-            <form action="/admin/editevent" method="post">
-              <input class="input" type="submit" name="EditEvent" value="Edit Event" class="button" style="color: whitesmoke;" />
-            </form>
-          </div>
-          <div class="btn" id="userdata">
-            <form action="" method="post">
-              <input class="input" type="submit" name="Register" value="User Data" class="button" style="color: whitesmoke;" />
-            </form>
-          </div>
-          <div class="btn" id="deleteevent">
-            <form action="/admin/eventdelete" method="post">
-              <input class="input" type="submit" name="DeleteEvent" value="Delete Event" class="button" style="color: whitesmoke;" />
-            </form>
-          </div> -->
           <div class="btn" id="poll">
             <!-- <form > -->
               <input class="input" type="submit" name="Register" value="Poll" class="button" style="color: whitesmoke;"/>
             <!-- </form> -->
           </div>
+          
         </div>
       </div>
     </div>
-    <%- include('../partials/footer'); %>
+
     <div class="footer2">
-      <div></div>
+      <div>
+      </div>
       <p>Copyright 2021 Gaslur</p>
     </div>
   </div>

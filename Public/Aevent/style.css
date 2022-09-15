@@ -37,18 +37,19 @@ a{
 
 .article_container_img {
     flex-grow: 1;
-    width: 60vw;
+    width: 26vw;
     height: 50vh;
-    border-radius: 10px;
+    border-radius: 20px;
     margin: 5%;
     margin-top: 8%;
     margin-right: 0%;
     text-align: center;
     background-color: #d4d9df;
-    background: url("https://source.unsplash.com/HW5013eyvlU");
+    /* background: url("https://source.unsplash.com/HW5013eyvlU"); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    /* max-width: 35vw; */
 }
 
 .article_container_content {

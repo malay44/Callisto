@@ -269,8 +269,14 @@ router.post("/event/register", isAuth, (req, res, next) => {
   // Event.findOne({id: req.rawHeaders[32]})
 });
 
-router.post("/admin/deleteuser/:id", isAuth, (req, res, next) => {
-  res.send("i will delete just wait")
+router.post("/admin/deregisteruser/:id", isAdmin, (req, res, next) => {
+  const eventid = req.rawHeaders[33].substring(31,55);
+  Event.findById(eventid).then((event)=>{
+    event.regUsers.pop(req.params.id);
+    event.save();
+    res.redirect(req.rawHeaders[33]);
+  });
+  // res.send("i will delete just wait")
 });
 
 
