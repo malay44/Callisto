@@ -32,17 +32,11 @@
     </div>
 
     <div class="poll" id="poll-box">
-      <form action="/poll" method="post">
-      <h3> <%= pollopt.polltitle %> </h3>
-      <ul>
-          <div style="display: none ;"> <%= pollans %> </div>
-          <li><input name="poll" type="radio" value="1" /><%= pollopt.poll1 %> </li>
-          <li><input name="poll" type="radio" value="2" /><%= pollopt.poll2 %> </li>
-          <li><input name="poll" type="radio" value="3" /><%= pollopt.poll3 %> </li>
-          <li><input name="poll" type="radio" value="4" /><%= pollopt.poll4 %> </li>
-        </ul>
-        <input class="btn" type="submit" value="Submit" />
-      </form>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+
+      <div id="container" style="width: 100%; height: 400px"></div>
+
       <input class="btn" type="submit" value="Back" id="back" />
     </div>
 
@@ -88,11 +82,12 @@
               <input class="input" type="submit" name="DeleteEvent" value="Delete Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>
-          <div class="btn" id="polldata">
-            <form action="" method="get">
-              <input class="input" type="submit" name="polldata" value="Poll Data" class="button" style="color: whitesmoke;" />
-            </form>
+          <div class="btn" id="poll">
+            <!-- <form > -->
+              <input class="input" type="submit" name="Register" value="Poll Data" class="button" style="color: whitesmoke;"/>
+            <!-- </form> -->
           </div>
+          
         </div>
       </div>
     </div>
