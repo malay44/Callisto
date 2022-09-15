@@ -33,13 +33,13 @@
 
     <div class="poll" id="poll-box">
       <form action="/poll" method="post">
-      <h3>Select an option below that you like best or something...</h3>
+      <h3> <%= pollopt.polltitle %> </h3>
       <ul>
-          <div style="display: none ;"> <%= pollopt %> </div>
-          <li><input name="poll" type="radio" value="1" />Option 1</li>
-          <li><input name="poll" type="radio" value="2" />Option 2</li>
-          <li><input name="poll" type="radio" value="3" />Option 3</li>
-          <li><input name="poll" type="radio" value="4" />Option 4</li>
+          <div style="display: none ;"> <%= pollans %> </div>
+          <li><input name="poll" type="radio" value="1" /><%= pollopt.poll1 %> </li>
+          <li><input name="poll" type="radio" value="2" /><%= pollopt.poll2 %> </li>
+          <li><input name="poll" type="radio" value="3" /><%= pollopt.poll3 %> </li>
+          <li><input name="poll" type="radio" value="4" /><%= pollopt.poll4 %> </li>
         </ul>
         <input class="btn" type="submit" value="Submit" />
       </form>
@@ -47,8 +47,8 @@
     </div>
 
     <div id="article_container">
-      <img class="article_container_img" src="https://source.unsplash.com/random/200x200/?img=1" alt="">
-      <!-- <img class="article_container_img" src="<%= event.photo %> " alt=""> -->
+      <!-- <img class="article_container_img" src="https://source.unsplash.com/random/200x200/?img=1" alt=""> -->
+      <img class="article_container_img" src="<%= event.photo %> " alt="">
       <div class="article_container_content">
         <div class="the">
           <div class="line"></div>
@@ -73,11 +73,11 @@
           On:- <%= event.date %>, <%= event.time %>
         </p>
         <div class="container">
-          <!-- <div class="btn" id="register">
+          <div class="btn" id="register">
             <form action="/event/register" method="post">
-              <input class="input" type="submit" name="Register" value="Register" class="button" />
+              <input class="input" type="submit" name="Register" value="Register" class="button" style="color: whitesmoke;" />
             </form>
-          </div> -->
+          </div>
           <div class="btn" id="editevent">
             <form action="/admin/editevent" method="post">
               <input class="input" type="submit" name="EditEvent" value="Edit Event" class="button" style="color: whitesmoke;" />
@@ -97,6 +97,11 @@
             <!-- <form > -->
               <input class="input" type="submit" name="Register" value="Poll" class="button" style="color: whitesmoke;"/>
             <!-- </form> -->
+          </div>
+          <div class="btn" id="polldata">
+            <form action="/userlist/<%= event._id %> " method="get">
+              <input class="input" type="submit" name="polldata" value="Poll Data" class="button" style="color: whitesmoke;" />
+            </form>
           </div>
         </div>
       </div>

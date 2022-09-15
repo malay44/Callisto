@@ -8,14 +8,12 @@ const isAuth = require("./authMiddleware").isAuth;
 const isAdmin = require("./authMiddleware").isAdmin;
 const isUser = require("./authMiddleware").isUser;
 const path = require("path");
-const { exit } = require("process");
 
 /**
  * -------------- POST ROUTES ----------------
  */
 
-router.post(
-  "/login",
+router.post("/login",
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
     successRedirect: "home",
@@ -56,6 +54,7 @@ router.post("/register", (req, res, next) => {
 router.post("/admin/addevent", isAdmin, (req, res, next) => {
   // console.log("hi");
   // res.send('You made it to the admin route.');
+  const popt = req.body.poll.split("|");
   Event.findOne({ name: req.body.ename })
     .then((event) => {
       if (event) {
@@ -90,6 +89,13 @@ router.post("/admin/addevent", isAdmin, (req, res, next) => {
             poll3: 0,
             poll4: 0,
           },
+          pollopt: {
+            polltitle: popt[0],
+            poll1: popt[1],
+            poll2: popt[2],
+            poll3: popt[3],
+            poll4: popt[4],
+          }
           // hidden: req.body.hidden,
         });
         newEvent.save().then((event) => {
@@ -263,6 +269,11 @@ router.post("/event/register", isAuth, (req, res, next) => {
   // Event.findOne({id: req.rawHeaders[32]})
 });
 
+router.post("/admin/deleteuser/:id", isAuth, (req, res, next) => {
+  res.send("i will delete just wait")
+});
+
+
 /**
  * -------------- GET ROUTES ----------------
  */
@@ -310,27 +321,37 @@ router.get("/event/:id", isAuth, (req, res, next) => {
   Event.findById(req.params.id, function (err, event) {
     User.findById(req.user._id).then((user) => {
       const usrid = req.user._id;
-      var pollopt;
+      var pollans;
       for (let index = 0; index < event.pollusres.length; index++) {
         if (usrid.equals(event.pollusres[index].user)) {
-          pollopt = event.pollusres[index].opt;
+          pollans = event.pollusres[index].opt;
           break;
         }
       }
       if (user.admin) {
         res.render("Aevent/index.ejs", { 
           event: event, 
-          pollopt: pollopt });
+          pollans: pollans,
+          pollopt: event.pollopt, 
+        });
         // res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
       } else {
         res.render("Uevent/index.ejs", { 
           event: event, 
-          pollopt: pollopt });
+          pollans: pollans,
+          pollopt: event.pollopt,
+        });
         // res.sendFile(path.join(__dirname, "..", "Public/Uevent/index.html"));
       }
     });
   });
 });
+
+router.get("/userlist/:id", (req,res,next)=>{
+  const eventid = req.params.id;
+  res.render("userlist/index.ejs",{eventid: eventid});
+  // res.sendFile(path.join(__dirname, "..", "Public/userlist/index.html"));
+})
 
 router.get("/userdata/:id", (req, res, next) => {
   const eventid = req.params.id;

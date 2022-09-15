@@ -45,6 +45,13 @@ const EventSchema = new mongoose.Schema({
     poll3: Number,
     poll4: Number,
   },
+  pollopt: {
+    polltitle: String,
+    poll1: String,
+    poll2: String,
+    poll3: String,
+    poll4: String,
+  },
   type: String,
   date: String,
   place: String,
