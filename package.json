@@ -10,6 +10,7 @@
   "author": "Malay Patel",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "base64url": "^3.0.1",
     "connect-mongo": "^3.1.2",
     "cors": "^2.8.5",

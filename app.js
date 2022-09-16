@@ -8,6 +8,11 @@ const connection = require('./config/database');
 const path = require("path");
 var cors = require('cors')
 
+// mail
+
+const sgMail = require('@sendgrid/mail');
+const mails = require('./lib/emails.json');
+
 
 // Package documentation - https://www.npmjs.com/package/connect-mongo
 const MongoStore = require('connect-mongo')(session);

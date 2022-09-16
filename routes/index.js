@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
 const genPassword = require("../lib/passwordUtils").genPassword;
+const send_confirmation = require("../lib/EmailUtils").send_confirmation;
+const send = require("../lib/EmailUtils").send;
 const connection = require("../config/database");
 const User = connection.models.User;
 const Event = connection.models.Event;
@@ -295,8 +297,9 @@ router.get("/login", (req, res, next) => {
 router.get("/home", isAuth, (req, res, next) => {
   Event.find().then((events) => {
     // res.send(events);
-    console.log(events);
-    res.render("home/home.ejs", { events: events });
+    // console.log(events);
+    // res.send(req.user);
+    res.render("home/home.ejs", { events: events, user: req.user });
   });
 });
 
@@ -402,6 +405,21 @@ router.get("/protected-route", isAuth, (req, res, next) => {
 
 router.get("/admin/addevent", isAdmin, (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "Public/addevent/index.html"));
+});
+
+//email routes
+
+// router.get("/", function (req, res) {
+//   res.sendFile(__dirname+'/static/i.html');
+// });
+
+router.get("/sendmail",async function (req, res) {
+  const result = send_confirmation();
+  res.send(result);
+});
+router.get("/send",async function (req, res) {
+  const result = send();
+  res.send(result);
 });
 
 // Visiting this route logs the user out
