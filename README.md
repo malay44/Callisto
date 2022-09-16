@@ -11,3 +11,11 @@ mkdir .env as:-
   - SECRET=
   - GOOGLE_CLIENT_ID=
   - GOOGLE_CLIENT_SECRET=
+  - MAIL_API_KEY= 
+
+things to do:- 
+  - intergrating mail with front end
+  - editing content of all events to make them look legit
+  - display poll data
+  - conformation popup before delting an event and deregistating user from an event
+  - removal of poll and polldata button when no poll
