@@ -41,7 +41,7 @@ $(function () {
             backgroundColor: '#36394B'
         },
         title: {
-            text: 'Weekly Revenue',
+            text: PollData,
             style: {  
               color: '#fff'
             }
@@ -53,14 +53,14 @@ $(function () {
                   color: '#fff',
                  }
               },
-            categories: ['May 5 sfasfasfasfaf asda sd saf asf', 'May 6', 'May 7', 'May 8', 'May 9', 'May 10', 'May 11']
+            categories: [option1, option2, option3, option4]
         },
         yAxis: {
            gridLineWidth: .5,
 		      gridLineDashStyle: 'dash',
 		      gridLineColor: 'black',
            title: {
-                text: '',
+                text: 'Votes',
                 style: {
                   color: '#fff'
                  }
@@ -91,8 +91,8 @@ $(function () {
             } 
 		    },
         series: [{
-            name: 'Revenue',
-            data: [2200, 2800, 2300, 1700, 2000, 1200, 1400]
+            name: 'Votes',
+            data: [pc1,pc2,pc3,pc4]
         }]
     });
 });

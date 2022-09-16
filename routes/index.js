@@ -380,6 +380,7 @@ router.get("/event/:id", isAuth, (req, res, next) => {
           event: event,
           pollans: pollans,
           pollopt: event.pollopt,
+          pollcount: event.pollcount,
         });
         // res.sendFile(path.join(__dirname, "..", "Public/Aevent/index.html"));
       } else {
@@ -448,11 +449,11 @@ router.get("/admin/addevent", isAdmin, (req, res, next) => {
 //   res.sendFile(__dirname+'/static/i.html');
 // });
 
-router.get("/sendmail", async function (req, res) {
+router.get("/sendmail", isAdmin, async function (req, res) {
   const result = send_confirmation();
   res.send(result);
 });
-router.get("/send", async function (req, res) {
+router.get("/send", isAdmin, async function (req, res) {
   const result = send();
   res.send(result);
 });
