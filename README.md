@@ -20,4 +20,5 @@ things to do:-
   - conformation popup before delting an event and deregistating user from an event
   - removal of poll and polldata button when no poll
   - display poll option which has been already selected and removing submit poll button
+  - converting long text into .... from 
   
