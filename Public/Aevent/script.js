@@ -5,6 +5,9 @@ poll.onclick = function(){blur(true)};
 back.onclick = function(){blur(false)};
 // pollBox.style.display = "none";
 
+function clicked(element){
+  document.getElementById(element).click();
+}
 
 function blur(toggle){
   if (toggle){

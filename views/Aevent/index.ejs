@@ -68,19 +68,19 @@
           On:- <%= event.date %>, <%= event.time %>
         </p>
         <div class="container">
-          <div class="btn" id="editevent">
+          <div class="btn" id="editevent" onclick="clicked('ee')">
             <form action="/admin/editevent" method="post">
-              <input class="input" type="submit" name="EditEvent" value="Edit Event" class="button" style="color: whitesmoke;" />
+              <input class="input" type="submit" name="EditEvent" id="ee" value="Edit Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>
-          <div class="btn" id="userdata">
+          <div class="btn" id="userdata" onclick="clicked('ud')">
             <form action="/userlist/<%= event._id %>" method="get">
-              <input class="input" type="submit" name="Register" value="User Data" class="button" style="color: whitesmoke;" />
+              <input class="input" type="submit" name="Register" id="ud" value="User Data" class="button" style="color: whitesmoke;" />
             </form>
           </div>
-          <div class="btn" id="deleteevent">
+          <div class="btn" id="deleteevent" onclick="clicked('de')">
             <form action="/admin/eventdelete" method="post">
-              <input class="input" type="submit" name="DeleteEvent" value="Delete Event" class="button" style="color: whitesmoke;" />
+              <input class="input" type="submit" name="DeleteEvent" id="de" value="Delete Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>
           <div class="btn" id="poll">

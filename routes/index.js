@@ -241,7 +241,7 @@ router.post("/admin/eventdelete", isAdmin, (req, res, next) => {
     }
   });
   res.send(
-    `<script>alert("event deleted"); window.location.href = "/event/${eventid}"; </script>`
+    `<script>alert("event deleted"); window.location.href = "/home"; </script>`
   );
 });
 
@@ -324,11 +324,12 @@ router.post("/admin/deregisteruser/:id", isAdmin, (req, res, next) => {
  */
 
 router.get("/", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
+  res.render("login-signup/index.ejs", { alert: ""});
 });
 
 router.get("/login", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
+  res.render("login-signup/index.ejs", { alert: ""});
+  // res.sendFile(path.join(__dirname, "..", "Public/login-signup/index.html"));
 });
 
 router.get("/home", isAuth, (req, res, next) => {
@@ -479,7 +480,7 @@ router.get("/login-success", (req, res, next) => {
 });
 
 router.get("/login-failure", (req, res, next) => {
-  res.send("You entered the wrong password.");
+  res.render("login-signup/index.ejs", { alert: "wrong password / username"});
 });
 
 module.exports = router;
