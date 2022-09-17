@@ -389,7 +389,7 @@ router.get("/userdata/:id", (req, res, next) => {
   Event.findById(eventid)
     .populate({
       path: "regUsers",
-      select: ["username", "_id", "email", "number"],
+      select: ["username","name", "_id", "email", "number"],
     })
     .exec((err, docs) => {
       if (err) throw err;
