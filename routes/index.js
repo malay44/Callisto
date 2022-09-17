@@ -300,13 +300,13 @@ router.post("/event/register/:id", isAuth, (req, res, next) => {
     });
 });
 
-router.get("/admin/deregisteruser/:id", isAdmin, (req, res, next) => {
-  const eventid = req.query.id;
+router.get("/admin/deregisteruser/:uid/:eid", isAdmin, (req, res, next) => {
+  const eventid = req.params.eid;
   console.log(eventid);
   Event.findById(eventid).then((event) => {
     console.log("<<<<<<<<<<<----------------------------------------:>>>>>>>>>>>>>>>");
     console.log(event);
-    event.regUsers.pop(req.params.id);
+    event.regUsers.pop(req.params.uid);
     event.save();
     res.redirect(req.originalUrl);
   });
