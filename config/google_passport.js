@@ -30,7 +30,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/google/redirect",
+      callbackURL: "https://callistox.herokuapp.com/google/redirect",
     },
     function (accessToken, refreshToken, profileObj, done) {
       // console.log(profileObj)
