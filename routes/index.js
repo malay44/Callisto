@@ -240,10 +240,8 @@ router.post("/admin/eventdelete", isAdmin, (req, res, next) => {
   );
 });
 
-router.post("/event/register", isAuth, (req, res, next) => {
-  console.log("----------------------hi------------------");
-  const eventid = req.rawHeaders[33].substring(28);
-  console.log(eventid);
+router.post("/event/register/:id", isAuth, (req, res, next) => {
+  const eventid = req.params.id;
 
   User.findById(req.user._id)
     .then((user) => {
@@ -300,8 +298,6 @@ router.post("/event/register", isAuth, (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-
-  // Event.findOne({id: req.rawHeaders[32]})
 });
 
 router.post("/admin/deregisteruser/:id", isAdmin, (req, res, next) => {
