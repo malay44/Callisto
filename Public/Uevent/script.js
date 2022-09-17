@@ -4,7 +4,7 @@ var back = document.getElementById("back");
 poll.onclick = function(){blur(true)};
 back.onclick = function(){blur(false)};
 // pollBox.style.display = "none";
-document.getElementById(document.getElementById("data").innerText).checked = true;
+document.getElementById(parseInt(document.getElementById("data").innerText)).checked = true;
 
 
 

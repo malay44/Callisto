@@ -12,11 +12,11 @@
     const option2 = "<%= pollopt.poll2 %>";
     const option3 = "<%= pollopt.poll3 %>";
     const option4 = "<%= pollopt.poll4 %>";
-    const pc1 = "<%= pollcount.poll1 %>";
-    const pc2 = "<%= pollcount.poll2 %>";
-    const pc3 = "<%= pollcount.poll3 %>";
-    const pc4 = "<%= pollcount.poll4 %>";
-    console.log(pc1);
+    const pc1 = parseInt("<%= pollcount.poll1 %>");
+    const pc2 = parseInt("<%= pollcount.poll2 %>");
+    const pc3 = parseInt("<%= pollcount.poll3 %>");
+    const pc4 = parseInt("<%= pollcount.poll4 %>");
+    console.log(pc1,pc2,pc3,pc4);
   </script>
 </head>
 
@@ -95,11 +95,13 @@
               <input class="input" type="submit" name="DeleteEvent" id="de" value="Delete Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>
-          <div class="btn" id="poll">
-            <!-- <form > -->
-              <input class="input" type="submit" name="Register" value="Poll Data" class="button" style="color: whitesmoke;"/>
-            <!-- </form> -->
-          </div>
+          <% if (pollopt.polltitle) { %>
+            <div class="btn" id="poll">
+              <!-- <form > -->
+                <input class="input" type="submit" name="Register" value="Poll Data" class="button" style="color: whitesmoke;"/>
+              <!-- </form> -->
+            </div>
+          <% } %>
           
         </div>
       </div>
