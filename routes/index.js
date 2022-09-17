@@ -303,6 +303,7 @@ router.post("/event/register/:id", isAuth, (req, res, next) => {
 router.get("/admin/deregisteruser/:uid/:eid", isAdmin, (req, res, next) => {
   const eventid = req.params.eid;
   console.log(eventid);
+  console.log(req.params.uid);
   Event.findById(eventid).then((event) => {
     console.log("<<<<<<<<<<<----------------------------------------:>>>>>>>>>>>>>>>");
     console.log(event);
