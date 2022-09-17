@@ -184,6 +184,7 @@ router.post("/poll", isAuth, (req, res, next) => {
 
 router.post("/admin/editevent", isAdmin, (req, res, next) => {
   const eventid = req.rawHeaders[33].substring(28)
+  console.log("<<<<<<______________>>>>>>>>>__________<<<<<<>>>>>>>>");
   console.log(eventid);
   res.redirect(`https://callistox.herokuapp.com/admin/editevent/${eventid}`);
 });
