@@ -87,5 +87,9 @@ app.use(routes);
  * -------------- SERVER ----------------
  */
 
-// Server listens on http://localhost:3000
-app.listen(3000);
+if (process.env.NODE_ENV === 'production') {
+    
+}
+
+const port = process.env.PORT || 3000;
+app.listen(port);
