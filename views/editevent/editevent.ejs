@@ -29,20 +29,20 @@
     <form method="post" action="/admin/editevent/<%= _id %>">
       <div class="container">
         <fieldset>
-          <label>Name of the event: <input type="text" name="ename" value=<%=name %> required /></label>
-          <label>Date: <input type="text" name="eDate" required value=<%=date %> /></label>
-          <label>Time: <input type="text" name="eTime" required /></label>
-          <label>Artist Name: <input type="text" name="aname" required value=<%=artist.name %> /></label>
+          <label>Name of the event: <input type="text" name="ename" value=<%=name%> required /></label>
+          <label>Date: <input type="text" name="eDate" required value=<%=date%> /></label>
+          <label>Time: <input type="text" name="eTime" required value=<%=time%>/></label>
+          <label>Artist Name: <input type="text" name="aname" required value=<%=artist.name%> /></label>
           <label>Poll: <input type="text" name="poll" placeholder="optional*, write options seprated by '|' .Eg opt1|opt2|opt3" /></label>
 
-          <label>event picture URL: <input type="text" name="eiURL" required value=<%=photo %> /></label>
+          <label>event picture URL: <input type="text" name="eiURL" required value=<%=photo%> /></label>
           <label>Description of the event:
             <textarea name="disc" rows="3" cols="30" placeholder="complete description of the event"
-              required> <%= discription %> </textarea>
+              required> <%=discription%> </textarea>
           </label>
           <label>Brief description(displayed on card):
             <textarea name="bdisc" rows="3" cols="30" placeholder="I am the brief description of event"
-              required> <%= briefdiscription %> </textarea>
+              required> <%=briefdiscription%> </textarea>
           </label>
           <label><input type="checkbox" name="hidden" class="inline" />Make event hidden</label>
         </fieldset>

@@ -43,8 +43,8 @@
       <% user.regEvent.forEach(function(event) { %>
         <div class=item>
           <a href="https://callistox.herokuapp.com/event/<%=event._id%>">
-            <img class="item-img" src="https://source.unsplash.com/random/200x200/?img=1" border="0">
-            <!-- <img class="item-img" src="<%=event.photo%>" border="0"> -->
+            <!-- <img class="item-img" src="https://source.unsplash.com/random/200x200/?img=1" border="0"> -->
+            <img class="item-img" src="<%=event.photo%>" border="0">
           </a>
           <div class="item-title">
             <p><%= event.name %> </p>
