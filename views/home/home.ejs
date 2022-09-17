@@ -45,6 +45,8 @@
           <button class="infobox-explorebtn selected" onclick="scrollToDiscover()">Explore</button>
           <% if (user.admin) { %>
             <a href="https://callistox.herokuapp.com/admin/addevent"><button class="infobox-createbtn">Create</button></a>
+            <% } else{ %>
+            <a href="https://callistox.herokuapp.com/myprofile"><button class="infobox-createbtn"> My Profile</button></a>
             <% } %>
         </div>
       </div>
