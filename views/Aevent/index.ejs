@@ -91,7 +91,7 @@
             </form>
           </div>
           <div class="btn" id="deleteevent" onclick="clicked('de')">
-            <form action="/admin/eventdelete" method="post">
+            <form action="/admin/eventdelete/<%= event._id %>" method="post">
               <input class="input" type="submit" name="DeleteEvent" id="de" value="Delete Event" class="button" style="color: whitesmoke;" />
             </form>
           </div>

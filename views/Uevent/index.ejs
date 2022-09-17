@@ -32,8 +32,8 @@
     </div>
 
     <div class="poll" id="poll-box">
-      <form action="/poll" method="post">
-      <h3 > <%= pollopt.polltitle %> </h3>
+      <form action="/poll/<%= event._id %>" method="post">
+      <h3> <%= pollopt.polltitle %> </h3>
       <ul>
           <div id="data" style="display: none ;"> <%= pollans %> </div>
           <li><input name="poll" type="radio" value="1" id="1"/><%= pollopt.poll1 %> </li>
@@ -76,7 +76,7 @@
         </p>
         <div class="container">
           <div class="btn" id="register">
-            <form action="/event/register/<%= event._id %> " method="post">
+            <form action="/event/register/<%= event._id %>" method="post">
               <input class="input" type="submit" name="Register" value="Register" class="button" style="color: whitesmoke;" />
             </form>
           </div>

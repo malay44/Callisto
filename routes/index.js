@@ -149,8 +149,8 @@ router.post("/admin/addevent", isAdmin, (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
-router.post("/poll", isAuth, (req, res, next) => {
-  const eventid = req.rawHeaders[33].substring(28);
+router.post("/poll/:id", isAuth, (req, res, next) => {
+  const eventid = req.params.id;
 
   Event.findById(eventid).then(async (event) => {
     const usrid = await req.user._id;
@@ -224,8 +224,8 @@ router.post("/admin/editevent/:id", isAdmin, (req, res, next) => {
   );
 });
 
-router.post("/admin/eventdelete", isAdmin, (req, res, next) => {
-  const eventid = req.rawHeaders[33].substring(28);
+router.post("/admin/eventdelete/:id", isAdmin, (req, res, next) => {
+  const eventid = req.params.id;
   // console.log(eventid);
   // console.log("-----------------------delete--------------------");
   Event.findByIdAndDelete(eventid, function (err, docs) {
@@ -301,11 +301,11 @@ router.post("/event/register/:id", isAuth, (req, res, next) => {
 });
 
 router.post("/admin/deregisteruser/:id", isAdmin, (req, res, next) => {
-  const eventid = req.rawHeaders[33].substring(31, 55);
+  const eventid = req.id;
   Event.findById(eventid).then((event) => {
     event.regUsers.pop(req.params.id);
     event.save();
-    res.redirect(req.rawHeaders[33]);
+    res.redirect(req.originalUrl);
   });
   // res.send("i will delete just wait")
 });
