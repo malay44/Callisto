@@ -177,14 +177,14 @@ router.post("/poll", isAuth, (req, res, next) => {
         event.pollcount.poll4++;
       }
       event.save();
-      res.redirect(`http://localhost:3000/event/${eventid}`);
+      res.redirect(`https://callistox.herokuapp.com/event/${eventid}`);
     }
   });
 });
 
 router.post("/admin/editevent", isAdmin, (req, res, next) => {
   const eventid = req.rawHeaders[33].substring(28);
-  res.redirect(`http://localhost:3000/admin/editevent/${eventid}`);
+  res.redirect(`https://callistox.herokuapp.com/admin/editevent/${eventid}`);
 });
 
 router.post("/admin/editevent/:id", isAdmin, (req, res, next) => {
@@ -222,7 +222,7 @@ router.post("/admin/editevent/:id", isAdmin, (req, res, next) => {
       if (err) {
         console.log(err);
       } else {
-        res.redirect(`http://localhost:3000/event/${req.params.id}`);
+        res.redirect(`https://callistox.herokuapp.com/event/${req.params.id}`);
         console.log(event);
       }
     }
