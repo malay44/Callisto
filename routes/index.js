@@ -199,18 +199,6 @@ router.post("/admin/editevent/:id", isAdmin, (req, res, next) => {
       time: req.body.eTime,
       photo: req.body.eiURL,
       registrationFee: req.body.eFees,
-      pollusres: [
-        {
-          user: "630bbe5d27676b723b167125",
-          opt: "1",
-        },
-      ],
-      pollcount: {
-        poll1: 0,
-        poll2: 0,
-        poll3: 0,
-        poll4: 0,
-      },
       // hidden: req.body.hidden,
     },
     function (err, event) {

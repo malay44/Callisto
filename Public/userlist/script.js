@@ -21,16 +21,19 @@ const template = listItem => {
 console.log(eventid);
 fetch(`https://callistox.herokuapp.com/userdata/${eventid}`, { method: "get" })
 	.then(response => response.json())
-	.then(data =>
-		data.forEach(result => (list.innerHTML += template(result)))
-	)
+	.then(data =>{
+		for (let i = 1; i < data.length; i++) {
+		const result = data[i];
+		list.innerHTML += template(result)
+		};
+	})
 
-	const onClick = (event)=>{
-		if (event.target.nodeName === 'IMG'){
-			console.log(event.target.id);
-		}
+const onClick = (event)=>{
+	if (event.target.nodeName === 'IMG'){
+		console.log(event.target.id);
 	}
-	window.addEventListener('click', onClick);
+}
+window.addEventListener('click', onClick);
 	
 
 // Search
