@@ -325,25 +325,27 @@ router.get("/home", isAuth, (req, res, next) => {
 });
 
 router.get("/myprofile", isAuth, (req, res, next) => {
-  User.findById(req.user._id)
-    .populate({
-      path: "regEvent",
-      select: [
-        "artist",
-        "_id",
-        "name",
-        "discription",
-        "briefdiscription",
-        "photo",
-        "time",
-      ],
-    })
-    .exec((err, docs) => {
-      if (err) throw err;
-      // res.send(docs);
-      console.log(docs);
-      res.render("myprofile/myprofile.ejs", { user: docs });
-    });
+  Event.find().then((events) => {
+    User.findById(req.user._id)
+      .populate({
+        path: "regEvent",
+        select: [
+          "artist",
+          "_id",
+          "name",
+          "discription",
+          "briefdiscription",
+          "photo",
+          "time",
+        ],
+      })
+      .exec((err, docs) => {
+        if (err) throw err;
+        // res.send(docs);
+        console.log(docs);
+        res.render("myprofile/myprofile.ejs", { user: docs, events: events });
+      });
+  });
   // res.sendFile(path.join(__dirname, "..", "Public/myprofile/myprofile.html"));
 });
 
