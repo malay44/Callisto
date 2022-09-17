@@ -301,7 +301,7 @@ router.post("/event/register/:id", isAuth, (req, res, next) => {
 });
 
 router.post("/admin/deregisteruser/:id", isAdmin, (req, res, next) => {
-  const eventid = req.id;
+  const eventid = req.query.id;
   Event.findById(eventid).then((event) => {
     event.regUsers.pop(req.params.id);
     event.save();
