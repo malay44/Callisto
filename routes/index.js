@@ -309,7 +309,7 @@ router.get("/admin/deregisteruser/:uid/:eid", isAdmin, (req, res, next) => {
     console.log(event);
     event.regUsers.pop(req.params.uid);
     event.save();
-    res.redirect(req.originalUrl);
+    res.redirect(`/userlist/${eventid}`);
   });
   // res.send("i will delete just wait")
 });
