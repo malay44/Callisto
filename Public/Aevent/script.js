@@ -81,7 +81,7 @@ $(function () {
             enabled: false
         },
         tooltip: {
-           valuePrefix: '$'
+           valuePrefix: ''
         },
         plotOptions: {
 		      column: {

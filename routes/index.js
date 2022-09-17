@@ -474,12 +474,6 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-router.get("/login-success", (req, res, next) => {
-  res.send(
-    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
-  );
-});
-
 router.get("/login-failure", (req, res, next) => {
   res.render("login-signup/index.ejs", { alert: "wrong password / username"});
 });
