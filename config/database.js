@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-const conn = process.env.MONGODB_URL || process.env.DB_STRING;
+const conn = process.env.MONGODB_URL || process.env.DB_STRING_on;
 
 const connection = mongoose.createConnection(conn, {
     useNewUrlParser: true,
