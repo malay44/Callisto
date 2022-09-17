@@ -19,7 +19,7 @@ const template = listItem => {
   `;
 };
 console.log(eventid);
-fetch(`http://localhost:3000/userdata/${eventid}`, { method: "get" })
+fetch(`https://callistox.herokuapp.com/userdata/${eventid}`, { method: "get" })
 	.then(response => response.json())
 	.then(data =>
 		data.forEach(result => (list.innerHTML += template(result)))

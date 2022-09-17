@@ -17,17 +17,17 @@
         </svg>
       </button>
     <div class="navlinkwrap">
-      <span class="navlink"><a href="http://localhost:3000/home">Home</a></span>
-       <span class="navlink selectedlink"><a href="http://localhost:3000/myprofile">My Profile</a></span>
+      <span class="navlink"><a href="https://callistox.herokuapp.com/home">Home</a></span>
+       <span class="navlink selectedlink"><a href="https://callistox.herokuapp.com/myprofile">My Profile</a></span>
       <span class="navlink">Activity</span>
       <% if (user.admin) { %>
-        <span class="navlink"><a href="http://localhost:3000/admin/addevent">Add Event</a></span>
+        <span class="navlink"><a href="https://callistox.herokuapp.com/admin/addevent">Add Event</a></span>
       <% } else{ %>  
         <span class="navlink">How It Works</span>
       <% } %>
     </div>
     <div class="buttonwrap">
-      <a href="http://localhost:3000/logout">
+      <a href="https://callistox.herokuapp.com/logout">
         <button class="createbtn selectedbtn">SIGN OUT</button>
       </a>
     </div>
@@ -42,7 +42,7 @@
     <div class="discover-items">
       <% user.regEvent.forEach(function(event) { %>
         <div class=item>
-          <a href="http://localhost:3000/event/<%=event._id%>">
+          <a href="https://callistox.herokuapp.com/event/<%=event._id%>">
             <img class="item-img" src="https://source.unsplash.com/random/200x200/?img=1" border="0">
             <!-- <img class="item-img" src="<%=event.photo%>" border="0"> -->
           </a>
