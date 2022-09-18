@@ -307,7 +307,13 @@ router.get("/admin/deregisteruser/:uid/:eid", isAdmin, (req, res, next) => {
  */
 
 router.get("/", (req, res, next) => {
-  res.render("login-signup/index.ejs", { alert: ""});
+  Event.find().then((events) => {
+    // res.send(events);
+    // console.log(events);
+    // res.send(req.user);
+    res.render("home/home.ejs", { events: events, user: req.user });
+  });
+  // res.render("login-signup/index.ejs", { alert: ""});
 });
 
 router.get("/login", (req, res, next) => {

@@ -29,7 +29,11 @@
             <% } %>
       </div>
       <div class="buttonwrap">
-        <a href="https://callistox.herokuapp.com/logout"><button class="createbtn selectedbtn">SIGN OUT</button></a>
+        <% if (user) { %>
+          <a href="https://callistox.herokuapp.com/logout"><button class="createbtn selectedbtn">SIGN OUT</button></a>
+          <% } else{ %>
+            <a href="https://callistox.herokuapp.com/login"><button class="createbtn selectedbtn">SIGN IN</button></a>
+            <% } %>
       </div>
     </div>
     <div class="box">
