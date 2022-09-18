@@ -292,9 +292,13 @@ router.get("/admin/deregisteruser/:uid/:eid", isAdmin, (req, res, next) => {
   const eventid = req.params.eid;
   console.log(eventid);
   console.log(req.params.uid);
+  User.findById(req.params.uid).then((user)=>{
+    user.regEvent.pop(eventid);
+    user.save().then((user) => {
+       console.log(user);
+    });
+  })
   Event.findById(eventid).then((event) => {
-    console.log("<<<<<<<<<<<----------------------------------------:>>>>>>>>>>>>>>>");
-    console.log(event);
     event.regUsers.pop(req.params.uid);
     event.save();
     res.redirect(`/userlist/${eventid}`);
@@ -343,6 +347,7 @@ router.get("/myprofile", isAuth, (req, res, next) => {
           "briefdiscription",
           "photo",
           "time",
+          "date"
         ],
       })
       .exec((err, docs) => {
