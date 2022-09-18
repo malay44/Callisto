@@ -22,7 +22,7 @@ console.log(eventid);
 fetch(`https://callistox.herokuapp.com/userdata/${eventid}`, { method: "get" })
 	.then(response => response.json())
 	.then(data =>{
-		for (let i = 1; i < data.length; i++) {
+		for (let i = 0; i < data.length; i++) {
 		const result = data[i];
 		list.innerHTML += template(result)
 		};
