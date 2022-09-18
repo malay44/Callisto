@@ -22,11 +22,13 @@
         <span class="navlink selectedlink"><a href="https://callistox.herokuapp.com/home">Home</a></span>
         <span class="navlink"><a href="https://callistox.herokuapp.com/myprofile">My Profile</a></span>
         <span class="navlink">Activity</span>
-        <% if (user.admin) { %>
-          <span class="navlink"><a href="https://callistox.herokuapp.com/admin/addevent">Add Event</a></span>
-          <% } else{ %>
-            <span class="navlink">How It Works</span>
-            <% } %>
+        <% if (user) { %>
+          <% if (user.admin) { %>
+            <span class="navlink"><a href="https://callistox.herokuapp.com/admin/addevent">Add Event</a></span>
+          <% } %>
+        <% }else{ %>
+          <span class="navlink">How It Works</span>
+        <% } %>
       </div>
       <div class="buttonwrap">
         <% if (user) { %>
@@ -47,18 +49,20 @@
         </p>
         <div class="infobox-btnwrapper">
           <button class="infobox-explorebtn selected" onclick="scrollToDiscover()">Explore</button>
-          <% if (user.admin) { %>
+          <% if (user) { %>
+            <% if (user.admin) { %>
             <a href="https://callistox.herokuapp.com/admin/addevent"><button class="infobox-createbtn">Create</button></a>
-            <% } else{ %>
-            <a href="https://callistox.herokuapp.com/myprofile"><button class="infobox-createbtn"> My Profile</button></a>
             <% } %>
+          <% }else{ %>
+            <a href="https://callistox.herokuapp.com/myprofile"><button class="infobox-createbtn"> My Profile</button></a>
+          <% } %>
         </div>
       </div>
       <div class="display">
         <a href="https://callistox.herokuapp.com/event/6325d9e8ecd3bda4b201d4e6">
-        <img class="display-nft item-img"
-          src="https://media.istockphoto.com/photos/party-people-enjoy-concert-at-festival-summer-music-festival-picture-id1324561072?b=1&k=20&m=1324561072&s=170667a&w=0&h=LwWrgpVzxoznttv_6qXMVtZHer1QSLNbfHmORZCFhN0="
-          alt="unsplash-OG44d93i-NJk" border="0">
+          <img class="display-nft item-img"
+            src="https://media.istockphoto.com/photos/party-people-enjoy-concert-at-festival-summer-music-festival-picture-id1324561072?b=1&k=20&m=1324561072&s=170667a&w=0&h=LwWrgpVzxoznttv_6qXMVtZHer1QSLNbfHmORZCFhN0="
+            alt="unsplash-OG44d93i-NJk" border="0">
         </a>
         <div class="infowrapper">
           <div class="info">
