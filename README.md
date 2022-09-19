@@ -15,7 +15,6 @@ mkdir .env as:-
 
 things to do:- 
   - intergrating mail with front end
-  - editing content of all events to make them look legit
   - conformation popup before delting an event and deregistating user from an event
   - converting long text into .... from 
   
