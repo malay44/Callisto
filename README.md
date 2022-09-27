@@ -13,6 +13,7 @@ mkdir .env as:-
   - GOOGLE_CLIENT_ID=
   - GOOGLE_CLIENT_SECRET=
   - MAIL_API_KEY= 
+ Also have to change domain name to localhost:PORT
 
 things to do:- 
   - intergrating mail with front end
