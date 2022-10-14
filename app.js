@@ -6,9 +6,16 @@ var crypto = require('crypto');
 var routes = require('./routes/index');
 const connection = require('./config/database');
 const path = require("path");
-var cors = require('cors')
+var cors = require('cors');
+var rate_limit = require('express-rate-limit');
 
 // mail
+
+const limiter = rate_limit({
+    windowMs: 300000,
+    max: 300,
+})
+
 
 const sgMail = require('@sendgrid/mail');
 const mails = require('./lib/emails.json');
@@ -29,6 +36,8 @@ var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(limiter);
+app.set('trust proxy', 1);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // app.use(express.static(__dirname + '/Public/login-signup'));
