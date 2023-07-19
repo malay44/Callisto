@@ -1,5 +1,5 @@
 ## WebApp link
-<a href="https://callistox.herokuapp.com/">Callisto - A Galaxy Of Events</a> -- Under maintenance 
+<a href="/">Callisto - A Galaxy Of Events</a> -- Under maintenance 
 ## How to run the app
 
 _Make sure to run the `mongod` service before running the app locally._

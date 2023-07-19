@@ -177,7 +177,7 @@ router.post("/poll/:id", isAuth, (req, res, next) => {
         event.pollcount.poll4++;
       }
       event.save();
-      res.redirect(`https://callistox.herokuapp.com/event/${eventid}`);
+      res.redirect(`/event/${eventid}`);
     }
   });
 });
@@ -205,7 +205,7 @@ router.post("/admin/editevent/:id", isAdmin, (req, res, next) => {
       if (err) {
         console.log(err);
       } else {
-        res.redirect(`https://callistox.herokuapp.com/event/${req.params.id}`);
+        res.redirect(`/event/${req.params.id}`);
         console.log(event);
       }
     }
